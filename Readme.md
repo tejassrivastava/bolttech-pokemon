@@ -17,6 +17,7 @@ This contains all the Frontend Code & Backend API implementation
 
 - GET `/list` - Retrieve list of Pokemon ✔
 - GET `/:id` - Retrieve Pokemon Details By Id ✔
+- GET `/location/:id` - Retrieve Pokemon Location Details By Id ✔
 
 
 ## Run Locally

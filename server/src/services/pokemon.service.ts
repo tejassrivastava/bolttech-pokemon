@@ -51,18 +51,18 @@ export const fetchPokemonDetail = async (id: number): Promise<PokemonDetail> => 
 
 export const fetchLocationDetail = async (id: number): Promise<LocationDetail> => {
   const cacheKey = `location-detail-${id}`;
-  console.log(`[PokemonService] Checking cache for location detail with key: ${cacheKey}`);
+  console.debug(`[PokemonService] Checking cache for location detail with key: ${cacheKey}`);
   
   const cachedData = cache.get<LocationDetail>(cacheKey);
   if (cachedData) {
-    console.log(`[PokemonService] Returning cached location detail data for ID: ${id}`);
+    console.debug(`[PokemonService] Returning cached location detail data for ID: ${id}`);
     return cachedData;
   }
 
   try {
-    console.log(`[PokemonService] Fetching location detail from API for ID: ${id}`);
+    console.debug(`[PokemonService] Fetching location detail from API for ID: ${id}`);
     const response = await axios.get(`${BASE_URL}/location/${id}`);
-    console.log(`[PokemonService] Successfully fetched location: ${response.data.name}`);
+    console.debug(`[PokemonService] Successfully fetched location: ${response.data.name}`);
     cache.set(cacheKey, response.data);
     return response.data;
   } catch (error) {

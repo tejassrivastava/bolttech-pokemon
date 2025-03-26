@@ -35,11 +35,11 @@ export const getPokemonDetail = async (req: Request, res: Response) => {
 export const getLocationDetail = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   
-  console.log(`[PokemonController] Fetching location detail for ID: ${id}`);
+  console.debug(`[PokemonController] Fetching location detail for ID: ${id}`);
   
   try {
     const data = await fetchLocationDetail(id);
-    console.log(`[PokemonController] Successfully fetched location: ${data.name}`);
+    console.debug(`[PokemonController] Successfully fetched location: ${data.name}`);
     res.json(data);
   } catch (error) {
     console.error(`[PokemonController] Error fetching location detail for ID ${id}:`, error);
