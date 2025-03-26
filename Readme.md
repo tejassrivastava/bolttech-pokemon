@@ -97,11 +97,10 @@ http://localhost:3000/
 
 ![Image 1](./TestResult.png)
 
-[![](https://github.com/tejassrivastava/ncle-be/blob/main/TestResultNcle.png)](https://github.com/tejassrivastava/ncle-be/blob/main/TestResultNcle.png)
 
 **Current Test Coverage Result:**
 
-[![](https://github.com/tejassrivastava/ncle-be/blob/main/TestCoverageNcle.png)](https://github.com/tejassrivastava/ncle-be/blob/main/TestCoverage.png)
+![Image 1](./TestCoverage.png)
 
 ## Authors
 
