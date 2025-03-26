@@ -13,11 +13,11 @@ export interface PokemonListItem {
 export interface PokemonDetail {
   id: number;
   name: string;
-  types: PokemonType[];
   sprites: {
     front_default: string;
     back_default: string;
   };
+  types: PokemonType[];
   height: number;
   weight: number;
 }
