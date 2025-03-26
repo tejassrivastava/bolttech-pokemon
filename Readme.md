@@ -1,11 +1,13 @@
-# BoltTech Pokemon Backend API
+# BoltTech Pokemon Frontend UI & Backend API
 
-This contains all the API implementation
+This contains all the Frontend Code & Backend API implementation
 
 # About the project implementation
 
 ## Tech Stack
 
+- Frontend Framework: React.js + Vite
+- CSS Framework: Tailwind CSS
 - Backend Framework: Express.js
 - Cache: node-cache
 - Test: Jest
@@ -88,9 +90,13 @@ http://localhost:3000/
 
 ## To run tests
 
-`cd server`
+```bash
+cd server
+```
+```bash
+npm run test
+```
 
-`npm run test`
 
 
 **Current Test Case Result:**

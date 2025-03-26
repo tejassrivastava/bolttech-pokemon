@@ -1,6 +1,6 @@
 import axios from 'axios';
 import NodeCache from 'node-cache';
-import { PokemonListResponse, PokemonDetail } from '../types/pokemon.types';
+import { PokemonListResponse, PokemonDetail, LocationDetail } from '../types/pokemon.types';
 
 const cache = new NodeCache({ stdTTL: 3600 }); // Cache for 1 hour
 const BASE_URL = 'https://pokeapi.co/api/v2';
@@ -46,5 +46,27 @@ export const fetchPokemonDetail = async (id: number): Promise<PokemonDetail> => 
   } catch (error) {
     console.error(`[PokemonService] Error fetching pokemon detail for ID ${id}:`, error);
     throw new Error(`Failed to fetch Pokemon detail: ${error}`);
+  }
+};
+
+export const fetchLocationDetail = async (id: number): Promise<LocationDetail> => {
+  const cacheKey = `location-detail-${id}`;
+  console.log(`[PokemonService] Checking cache for location detail with key: ${cacheKey}`);
+  
+  const cachedData = cache.get<LocationDetail>(cacheKey);
+  if (cachedData) {
+    console.log(`[PokemonService] Returning cached location detail data for ID: ${id}`);
+    return cachedData;
+  }
+
+  try {
+    console.log(`[PokemonService] Fetching location detail from API for ID: ${id}`);
+    const response = await axios.get(`${BASE_URL}/location/${id}`);
+    console.log(`[PokemonService] Successfully fetched location: ${response.data.name}`);
+    cache.set(cacheKey, response.data);
+    return response.data;
+  } catch (error) {
+    console.error(`[PokemonService] Error fetching location detail for ID ${id}:`, error);
+    throw new Error(`Failed to fetch location detail: ${error}`);
   }
 };

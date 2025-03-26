@@ -11,3 +11,8 @@ export const getPokemonDetail = async (id: number) => {
   const response = await axios.get(`${API_BASE_URL}/pokemon/${id}`);
   return response.data;
 };
+
+export const getPokemonLocationDetail = async (id: number) => {
+  const response = await axios.get(`${API_BASE_URL}/pokemon/location/${id}`);
+  return response.data;
+};

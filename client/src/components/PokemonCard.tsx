@@ -16,12 +16,13 @@ export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
 
   useEffect(() => {
     const fetchDetails = async () => {
+      console.log("in fetchDetails");
       const id = pokemon.url.split('/').filter(Boolean).pop();
       const data = await getPokemonDetail(Number(id));
       setDetails(data);
     };
     fetchDetails();
-  }, [pokemon]);
+  }, [pokemon.url]);
 
   if (!details) return (
     <div className="flex justify-center items-center h-full">
@@ -59,6 +60,7 @@ export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         pokemon={details}
+        id={pokemon.url.split('/').filter(Boolean).pop()}
       />
     </>
   );

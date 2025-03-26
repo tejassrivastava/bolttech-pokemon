@@ -29,3 +29,23 @@ interface PokemonType {
     url: string;
   };
 }
+
+export interface LocationDetail {
+  areas: {
+    name: string;
+    url: string;
+  }[];
+  id: number;
+  name: string;
+  names: {
+    language: {
+      name: string;
+      url: string;
+    };
+    name: string;
+  }[];
+  region: {
+    name: string;
+    url: string;
+  };
+}

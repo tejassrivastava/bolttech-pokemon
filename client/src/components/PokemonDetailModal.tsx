@@ -1,12 +1,34 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-
+import { useEffect, useState } from 'react';
+import { getPokemonLocationDetail } from '../services/api';
+import styles from './PokemonDetailModal.module.css';
 interface PokemonDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
   pokemon: any;
+  id: any;
 }
 
-export const PokemonDetailModal = ({ isOpen, onClose, pokemon }: PokemonDetailModalProps) => {
+export const PokemonDetailModal = ({ isOpen, onClose, pokemon, id }: PokemonDetailModalProps) => {
+  
+    const [locationData, setLocationData] = useState(null);
+
+  useEffect(() => {
+    const fetchLocationData = async () => {
+      try {        
+        const data = await getPokemonLocationDetail(Number(id));
+        setLocationData(data);
+      } catch (error) {
+        console.error('Error fetching location:', error);
+      }
+    };
+
+    if (isOpen && id) {
+      fetchLocationData();
+    }
+
+  }, [isOpen, id]);
+
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-10">
       <DialogBackdrop
@@ -76,6 +98,26 @@ export const PokemonDetailModal = ({ isOpen, onClose, pokemon }: PokemonDetailMo
                   </div>
                 </div>
               </div>
+
+              {locationData === null ? <> <div className="flex justify-center items-center h-full pt-3">
+      <div className={styles.loader}></div>
+    </div></> : (
+                <div className="mt-6 border-t pt-4">
+                  <h4 className="font-semibold text-lg mb-2">Location Information</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-600">Region</p>
+                      <p className="font-medium capitalize">{(locationData as any)?.region?.name || 'Unknown'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">City</p>
+                      <p className="font-medium capitalize">
+                        {(locationData as any)?.names?.find((n: any) => n.language.name === 'en')?.name || (locationData as any)?.name}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </DialogPanel>
         </div>

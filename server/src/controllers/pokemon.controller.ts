@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { fetchPokemonList, fetchPokemonDetail } from '../services/pokemon.service';
+import { fetchPokemonList, fetchPokemonDetail, fetchLocationDetail } from '../services/pokemon.service';
 
 export const getPokemonList = async (req: Request, res: Response) => {
   const offset = Number(req.query.offset) || 0;
@@ -29,5 +29,20 @@ export const getPokemonDetail = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(`[PokemonController] Error fetching pokemon detail for ID ${id}:`, error);
     res.status(500).json({ error: 'Failed to fetch Pokemon detail' });
+  }
+};
+
+export const getLocationDetail = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  
+  console.log(`[PokemonController] Fetching location detail for ID: ${id}`);
+  
+  try {
+    const data = await fetchLocationDetail(id);
+    console.log(`[PokemonController] Successfully fetched location: ${data.name}`);
+    res.json(data);
+  } catch (error) {
+    console.error(`[PokemonController] Error fetching location detail for ID ${id}:`, error);
+    res.status(500).json({ error: 'Failed to fetch location detail' });
   }
 };
